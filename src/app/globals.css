@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ──────────────────────────────────────────────────── */
+:root {
+  --spotlight-purple: #8b5cf6;
+  --spotlight-blue: #3b82f6;
+  --gradient-purple: rgba(139, 92, 246, 0.15);
+  --gradient-blue: rgba(59, 130, 246, 0.1);
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-bg-primary text-text-primary font-sans overflow-x-hidden;
+  }
+
+  ::selection {
+    background-color: rgba(139, 92, 246, 0.3);
+    color: #f8f6ff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-bg-primary;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #8b5cf6, #3b82f6);
+    border-radius: 3px;
+  }
+}
+
+/* ── Components ─────────────────────────────────────────────────────────────── */
+@layer components {
+  .section-container {
+    @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-12;
+  }
+
+  .section-padding {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .heading-xl {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight;
+  }
+
+  .heading-lg {
+    @apply text-3xl sm:text-4xl font-bold tracking-tight;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent-purple to-accent-blue bg-clip-text text-transparent;
+  }
+
+  .glass-card {
+    @apply bg-bg-secondary border border-border-subtle rounded-2xl
+           backdrop-blur-sm transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    @apply border-border-accent shadow-card-hover;
+  }
+
+  /* MagicButton — the conic gradient border lives in a ::before pseudo */
+  .magic-btn-wrapper {
+    position: relative;
+    border-radius: 9999px;
+    padding: 1px;
+    overflow: hidden;
+  }
+
+  .magic-btn-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: -100%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0%,
+      #8b5cf6 25%,
+      #3b82f6 50%,
+      transparent 75%
+    );
+    animation: rotate-border 4s linear infinite;
+  }
+
+  .magic-btn-inner {
+    position: relative;
+    z-index: 1;
+    border-radius: 9999px;
+  }
+}
+
+/* ── Utilities ──────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .animate-spotlight {
+    animation: spotlight-pulse 4s ease-in-out infinite;
+  }
+}
+
+/* ── Globe Canvas Override ──────────────────────────────────────────────────── */
+.globe-canvas canvas {
+  border-radius: 1rem !important;
+  touch-action: none;
+}
+
+/* ── JS crash / slow-load safety ───────────────────────────────────────────── */
+/*
+  Framer Motion renders initial animation state as inline opacity:0.
+  If JS fails to load, nothing is visible. This @media query targets
+  users with JS disabled. For JS-enabled but slow users, framer-motion
+  itself handles revealing content — no override needed.
+*/
+@media (scripting: none) {
+  main * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
