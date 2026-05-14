@@ -172,7 +172,7 @@ export const socialLinks: SocialLink[] = [
   {
     id: 3,
     name: "Email",
-    link: "mailto:souravsudheer.ss@gmail.com",
+    link: "mailto:souravsudheer@protonmail.me",
   },
 ];
 
@@ -181,5 +181,5 @@ export const personalInfo = {
   role: "Data Scientist & ML Engineer",
   tagline: "Building ML models that actually work in the real world.",
   bio: "I'm a Master of Data Analytics student at Queensland University of Technology with a passion for building machine learning systems that solve real problems. My work spans predictive modelling, deep learning for medical imaging, and end-to-end data pipelines — from raw data to interpretable, deployable insights. Currently broadening my toolkit into AI engineering and LLM applications.",
-  email: "souravsudheer.ss@gmail.com",
+  email: "souravsudheer@protonmail.me",
 };
